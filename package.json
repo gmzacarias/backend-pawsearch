@@ -1,11 +1,11 @@
 {
-  "name": "desafio-apx-modulo-7",
+  "name": "backend-pawsearch",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn ./be-src/dev.ts",
     "build": "tsc",
-    "start": "node ./be-dist/be-src/api.js",
+    "start": "node ./be-dist/api.js",
     "dev:sync": "ts-node ./be-src/sync.ts",
     "dev:sequelize": "ts-node ./be-src/models/sequelize.ts"
   },
@@ -20,10 +20,8 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
-    "otp-generator": "^4.0.1",
     "pg": "^8.7.3",
     "sequelize": "^6.31.1",
-    "shortid": "^2.2.16",
     "tsc": "^2.0.4",
     "typescript": "^4.9.4"
   },

@@ -8,7 +8,7 @@ import { generateToken, getToken, recoverPassword, resetPassword, sendResetPassw
 import { authMiddleware, CheckMiddleware } from "./models/middlewares"
 import 'dotenv/config'
 import "./types"
-import { error } from 'console';
+
 
 
 let app = express()
