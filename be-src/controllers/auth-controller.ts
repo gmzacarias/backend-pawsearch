@@ -11,7 +11,7 @@ let localhost
 if(ENVIRONMENT === "development"){
     localhost= "localhost:8080"
 }else {
-    localhost="https://vercel.com/"
+    localhost="vercel.com/"
 }
 
 export function getSHA256ofString(text) {
@@ -21,7 +21,6 @@ export function getSHA256ofString(text) {
 export async function getToken(data) {
     const { email, password } = data
     const hashedPassword = getSHA256ofString(password)
-
     try {
         const auth = await Auth.findOne({
             where: {
@@ -41,13 +40,6 @@ export async function getToken(data) {
         throw error
     }
 }
-
-
-
-
-
-
-
 
 export async function updatePassword(newPassword, userId) {
     const hashedPassword = getSHA256ofString(newPassword)
@@ -88,8 +80,6 @@ export async function recoverPassword(email, token) {
         throw (error)
     }
 }
-
-
 
 export async function sendResetPassword(email, token) {
     const verifiedSender = "gastonmzacarias@gmail.com"

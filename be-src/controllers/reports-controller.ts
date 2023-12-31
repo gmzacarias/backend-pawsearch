@@ -1,6 +1,14 @@
+import 'dotenv/config';
 import { Report, Pet, User } from "../models"
 import { sgMail } from "../lib/sendgrid"
 
+const ENVIRONMENT=process.env.NODE_ENV
+let localhost
+if(ENVIRONMENT === "development"){
+    localhost= "localhost:3000"
+}else {
+    localhost="vercel.com/"
+}
 
 export async function getReports() {
   return Report.findAll({})
@@ -41,7 +49,7 @@ export async function createReport(petId, data) {
                    informacion adicional:${data.pet_info}
                    </p>
                    <button style="background-color:#05254c; border-radius:12px; padding:10px;">
-                       <a href="https://localhost:3000/" style="color:#FFF; text-decoration:none;">ir a PawSearch</a>
+                       <a href="https://${localhost}" style="color:#FFF; text-decoration:none;">ir a PawSearch</a>
                    </button>
                  
                 </div>

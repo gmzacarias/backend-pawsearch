@@ -5,19 +5,15 @@ import { uploadCloudinary } from "../lib/cloudinary"
 export async function createUser(data) {
     const { email, password, userName, profilePhoto } = data;
     let userPicture;
-
     const userPictureRes = await uploadCloudinary(profilePhoto);
     userPicture = userPictureRes.secure_url;
-
     try {
         const newUser = await User.create({
             email,
             userName,
             password,
-            profilePhoto: userPicture 
+            profilePhoto: userPicture
         });
-
-        
 
         await Auth.create({
             myID: newUser.get("id"),
@@ -35,17 +31,16 @@ export async function createUser(data) {
 
 export async function dataUser(userId) {
     try {
-      const user = await User.findOne({
-        where: { id:userId},
-      });
-      console.log(user)
-      return user;
+        const user = await User.findOne({
+            where: { id: userId },
+        });
+        console.log(user)
+        return user;
     } catch (error) {
-      console.log(error);
-      throw error;
+        console.log(error);
+        throw error;
     }
-  }
-
+}
 
 export async function updateUser(data, userId) {
     const updateData = {
@@ -53,7 +48,7 @@ export async function updateUser(data, userId) {
         password: data.password,
         profilePhoto: data.profilePhoto
     };
-    
+
     if (updateData.userName) {
         try {
             await User.update({ userName: updateData.userName }, {
@@ -63,12 +58,11 @@ export async function updateUser(data, userId) {
             throw error;
         }
     }
-
     if (updateData.password) {
         try {
             await updatePassword(updateData.password, userId);
             const hashedPassword = getSHA256ofString(updateData.password);
-            await Auth.update({ password:hashedPassword }, {
+            await Auth.update({ password: hashedPassword }, {
                 where: { myID: userId }
             });
 
@@ -76,7 +70,6 @@ export async function updateUser(data, userId) {
             throw error;
         }
     }
-
     if (updateData.profilePhoto) {
         const userPictureRes = await uploadCloudinary(updateData.profilePhoto);
         const userPicture = userPictureRes.secure_url;
@@ -93,13 +86,9 @@ export async function updateUser(data, userId) {
             throw error;
         }
     }
-console.log(updateData)
+    console.log(updateData)
     return updateData;
 }
-
-
-
-
 
 export async function getAllUsers() {
     try {
