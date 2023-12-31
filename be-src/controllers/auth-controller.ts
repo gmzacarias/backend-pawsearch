@@ -34,7 +34,6 @@ export async function getToken(data) {
         let userId = null
         if (auth) {
             userId = auth.get("myID");
-            // token = jwt.sign({ id: auth.get("myID") }, SECRET)
             token = jwt.sign({ id: userId }, SECRET);
         }
         return { token, userId }
@@ -70,18 +69,10 @@ export async function updatePassword(newPassword, userId) {
     }
 }
 
-//generar un token unico,que expira en un tiempo determinado.
-
-
 export function generateToken(email) {
     const token = jwt.sign({ email }, SECRET, { expiresIn: "2h" })
     return token
 }
-
-
-
-
-
 
 export async function recoverPassword(email, token) {
     try {
@@ -127,7 +118,6 @@ export async function sendResetPassword(email, token) {
         </body>
         `
     }
-    
     try {
         await sgMail.send(msg);
         console.log(msg)
@@ -146,8 +136,6 @@ export async function resetPassword(token, newPassword) {
         //verifica el token y obtiene el mail asociado
         const decoded = jwt.verify(token, SECRET)
         const email = decoded["email"]
-
-
         //buscar el usuario por su mail en el modelo Auth
         const authUser = await Auth.findOne({ where: { email } })
         if (!authUser) {
@@ -162,29 +150,13 @@ export async function resetPassword(token, newPassword) {
         if (!user) {
             throw new Error("No se encontró un usuario en el modelo User con ese correo electrónico");
         }
-
         // Actualizar la contraseña en el modelo User
         await user.update({ password: newPassword});
         // Éxito en el restablecimiento de la contraseña
         return 'La contraseña se ha restablecido correctamente';
     }
     catch (error) {
-        throw error
+        console.error("Error",error)
     }
 }
 
-
-export async function dataAuth(){
-    try {
-        const user = await Auth.findAll()
-        if (!user) {
-            throw new Error("no se encontro al usuario")
-        }
-        
-
-        return user
-    }
-    catch (error) {
-        throw (error)
-    }
-}
