@@ -6,38 +6,49 @@ import * as jwt from "jsonwebtoken";
 
 
 const SECRET = process.env.SECRET
-const ENVIRONMENT=process.env.NODE_ENV
+const ENVIRONMENT = process.env.NODE_ENV
 let localhost
-if(ENVIRONMENT === "development"){
-    localhost= "localhost:8080"
-}else {
-    localhost="vercel.com/"
+if (ENVIRONMENT === "development") {
+    localhost = "localhost:8080"
+} else {
+    localhost = "vercel.com/"
 }
 
 export function getSHA256ofString(text) {
     return crypto.createHash('sha256').update(text).digest('hex')
 }
 
+
+
 export async function getToken(data) {
     const { email, password } = data
-    const hashedPassword = getSHA256ofString(password)
-    try {
-        const auth = await Auth.findOne({
-            where: {
-                email,
-                password: hashedPassword
-            }
-        })
-        console.log(auth);
-        let token = null
-        let userId = null
-        if (auth) {
-            userId = auth.get("myID");
-            token = jwt.sign({ id: userId }, SECRET);
+    const user = await User.findOne({
+        where: {
+            email: email
         }
-        return { token, userId }
-    } catch (error) {
-        throw error
+    });
+    const getPassword = user.get("password")
+    if (getPassword === password) {
+        try {
+            const hashedPassword = getSHA256ofString(password)
+            const auth = await Auth.findOne({
+                where: {
+                    email,
+                    password: hashedPassword
+                }
+            })
+            console.log(auth);
+            let token = null
+            let userId = null
+            if (auth) {
+                userId = auth.get("myID");
+                token = jwt.sign({ id: userId }, SECRET);
+            }
+            return { token, userId }
+        } catch (error) {
+            console.error(error)
+            
+        }
     }
 }
 
@@ -141,12 +152,12 @@ export async function resetPassword(token, newPassword) {
             throw new Error("No se encontró un usuario en el modelo User con ese correo electrónico");
         }
         // Actualizar la contraseña en el modelo User
-        await user.update({ password: newPassword});
+        await user.update({ password: newPassword });
         // Éxito en el restablecimiento de la contraseña
         return 'La contraseña se ha restablecido correctamente';
     }
     catch (error) {
-        console.error("Error",error)
+        console.error("Error", error)
     }
 }
 

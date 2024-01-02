@@ -62,10 +62,10 @@ app.post("/auth/signup", CheckMiddleware, async (req, res) => {
 app.post("/auth/token", CheckMiddleware, async (req, res) => {
     try {
         const { token, userId } = await getToken(req.body)
-        if (token) {
+        if (token !== undefined) {
             res.status(200).json({ token, userId })
         } else {
-            res.status(401).json({ message: "Error en la contraseña,acceso no autorizado" });
+            res.status(401).json({ message: "Acceso no autorizado" });
         }
     } catch (error) {
         res.status(400).json(error)

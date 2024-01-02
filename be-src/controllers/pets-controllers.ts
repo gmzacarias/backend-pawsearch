@@ -181,7 +181,6 @@ export async function reportPetFound(id) {
 }
 export async function deletePetById(id) {
   try {
-
     await deletePetAlgolia(id)
     return Pet.destroy({
       where: {
