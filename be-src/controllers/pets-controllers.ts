@@ -50,7 +50,7 @@ export async function updateGeoLocation(data, petId) {
 }
 
 
-export async function createPet(data,userId) {
+export async function createPet(data, userId) {
   let petImageURL
 
   if (data.imageURL) {
@@ -70,8 +70,8 @@ export async function createPet(data,userId) {
     found: false,
     image_URL: petImageURL,
     zone: data.zoneReport,
-    userId:userId
-   
+    userId: userId
+
   }
   try {
     const createdPet = await Pet.create({
@@ -131,18 +131,19 @@ export async function updatePet(data, id) {
 }
 
 export async function getAllPets() {
-  try { return await Pet.findAll({}) } catch (e) {
-    throw e
+  try { return await Pet.findAll({}) 
+} catch (error) {
+    throw error
   }
 }
 
 export async function getAllPetsWithIds(ids: Array<Number | String>) {
   try {
     return await Pet.findAll({
-      where: { id: ids }
+      where: { id: ids, found: false }
     })
-  } catch (e) {
-    throw e
+  } catch (error) {
+    throw error
   }
 }
 
@@ -192,7 +193,7 @@ export async function deletePetById(id) {
   }
 }
 
-export async function allPetsByUser(req,selectedFields) {
+export async function allPetsByUser(req, selectedFields) {
   try {
 
     return await Pet.findAll({
@@ -206,8 +207,8 @@ export async function allPetsByUser(req,selectedFields) {
   }
 }
 
-export async function deleteAllPets(){
+export async function deleteAllPets() {
   return Pet.destroy({
-    where:{}
+    where: {}
   })
 }
