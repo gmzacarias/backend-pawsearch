@@ -11,7 +11,7 @@ let localhost
 if (ENVIRONMENT === "development") {
     localhost = "localhost:8080"
 } else {
-    localhost = "vercel.com/"
+    localhost = "pawsearch-project-dev.web.app"
 }
 
 export function getSHA256ofString(text) {

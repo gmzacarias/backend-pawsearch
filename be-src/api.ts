@@ -9,8 +9,6 @@ import { authMiddleware, CheckMiddleware } from "./models/middlewares"
 import 'dotenv/config'
 import "./types"
 
-
-
 let app = express()
 app.use(cors({ origin: true, credentials: true }));
 

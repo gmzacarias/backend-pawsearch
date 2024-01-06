@@ -7,7 +7,7 @@ let localhost
 if(ENVIRONMENT === "development"){
     localhost= "http://127.0.0.1:8080/"
 }else {
-    localhost="vercel.com/"
+    localhost="https://pawsearch-project-dev.web.app/"
 }
 
 export async function getReports() {
