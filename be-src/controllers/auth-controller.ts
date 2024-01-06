@@ -6,13 +6,8 @@ import * as jwt from "jsonwebtoken";
 
 
 const SECRET = process.env.SECRET
-const ENVIRONMENT = process.env.NODE_ENV
-let localhost
-if (ENVIRONMENT === "development") {
-    localhost = "localhost:8080"
-} else {
-    localhost = "pawsearch-project-dev.web.app"
-}
+// const LOCAL_HOST = "http://127.0.0.1:8080/"
+const LOCAL_HOST = "https://pawsearch-project-dev.web.app/"
 
 export function getSHA256ofString(text) {
     return crypto.createHash('sha256').update(text).digest('hex')
@@ -109,7 +104,7 @@ export async function sendResetPassword(email, token) {
                        Por favor, haz clic en el siguiente enlace y sigue las instrucciones:
                    </p>
                    <button style="background-color:#05254c; border-radius:12px; padding:10px;">
-                       <a href="http://${localhost}/reset-password?token=${token}" style="color:#FFF; text-decoration:none;">Restablecer contraseña</a>
+                       <a href="${LOCAL_HOST}/reset-password?token=${token}" style="color:#FFF; text-decoration:none;">Restablecer contraseña</a>
                    </button>
                    <p style="font-size:16px;">Si no solicitaste restablecer tu contraseña, ignora este correo electrónico.</p>
                    <p style="font-size:16px;">Gracias.</p>

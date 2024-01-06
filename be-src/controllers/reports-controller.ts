@@ -2,13 +2,8 @@ import 'dotenv/config';
 import { Report, Pet, User } from "../models"
 import { sgMail } from "../lib/sendgrid"
 
-const ENVIRONMENT=process.env.NODE_ENV
-let localhost
-if(ENVIRONMENT === "development"){
-    localhost= "http://127.0.0.1:8080/"
-}else {
-    localhost="https://pawsearch-project-dev.web.app/"
-}
+// const LOCAL_HOST = "http://127.0.0.1:8080/"
+const LOCAL_HOST = "https://pawsearch-project-dev.web.app/"
 
 export async function getReports() {
   return Report.findAll({})
@@ -49,7 +44,7 @@ export async function createReport(petId, data) {
                    informacion adicional:${data.pet_info}
                    </p>
                    <button style="background-color:#05254c; border-radius:12px; padding:10px;">
-                       <a href="${localhost}" style="color:#FFF; text-decoration:none;">ir a PawSearch</a>
+                       <a href="${LOCAL_HOST}" style="color:#FFF; text-decoration:none;">ir a PawSearch</a>
                    </button>
                  
                 </div>
