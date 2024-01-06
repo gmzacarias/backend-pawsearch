@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { Auth, User } from "../models";
 import { sgMail } from "../lib/sendgrid"
 import * as crypto from "crypto";

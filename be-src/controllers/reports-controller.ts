@@ -1,4 +1,3 @@
-import 'dotenv/config';
 import { Report, Pet, User } from "../models"
 import { sgMail } from "../lib/sendgrid"
 
