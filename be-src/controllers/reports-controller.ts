@@ -1,8 +1,8 @@
 import { Report, Pet, User } from "../models"
 import { sgMail } from "../lib/sendgrid"
 
-// const LOCAL_HOST = "http://127.0.0.1:8080/"
-const LOCAL_HOST = "https://pawsearch-project-dev.web.app/"
+// const LOCAL_HOST = "http://127.0.0.1:8080"
+const LOCAL_HOST = "https://pawsearch-project-dev.web.app"
 
 export async function getReports() {
   return Report.findAll({})
