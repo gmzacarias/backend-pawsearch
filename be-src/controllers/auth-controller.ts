@@ -3,16 +3,13 @@ import { sgMail } from "../lib/sendgrid"
 import * as crypto from "crypto";
 import * as jwt from "jsonwebtoken";
 
-
 const SECRET = process.env.SECRET
 // const LOCAL_HOST = "http://127.0.0.1:8080"
-const LOCAL_HOST = "https://pawsearch-project-dev.web.app"
+const LOCAL_HOST = "https://pawsearch-598b3.web.app"
 
 export function getSHA256ofString(text) {
     return crypto.createHash('sha256').update(text).digest('hex')
 }
-
-
 
 export async function getToken(data) {
     const { email, password } = data
@@ -123,8 +120,6 @@ export async function sendResetPassword(email, token) {
         throw error
     }
 }
-
-
 
 export async function resetPassword(token, newPassword) {
     try {

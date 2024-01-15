@@ -2,7 +2,7 @@ import { Report, Pet, User } from "../models"
 import { sgMail } from "../lib/sendgrid"
 
 // const LOCAL_HOST = "http://127.0.0.1:8080"
-const LOCAL_HOST = "https://pawsearch-project-dev.web.app"
+const LOCAL_HOST = "https://pawsearch-598b3.web.app"
 
 export async function getReports() {
   return Report.findAll({})
@@ -45,12 +45,11 @@ export async function createReport(petId, data) {
                    <button style="background-color:#05254c; border-radius:12px; padding:10px;">
                        <a href="${LOCAL_HOST}" style="color:#FFF; text-decoration:none;">ir a PawSearch</a>
                    </button>
-                 
                 </div>
                <p style="font-size:16px;">©${year} - PAWSEARCH</p>
             </main>
         </body>
-        `
+      `
     }
     sgMail
       .send(msg)
@@ -64,6 +63,5 @@ export async function createReport(petId, data) {
   } catch (error) {
     throw error
   }
-
 }
 
