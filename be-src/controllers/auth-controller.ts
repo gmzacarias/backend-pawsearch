@@ -5,7 +5,7 @@ import * as jwt from "jsonwebtoken";
 
 const SECRET = process.env.SECRET
 // const LOCAL_HOST = "http://127.0.0.1:8080"
-const LOCAL_HOST = "https://pawsearch-598b3.web.app"
+const LOCAL_HOST = "https://pawsearch-app.web.app"
 
 export function getSHA256ofString(text) {
     return crypto.createHash('sha256').update(text).digest('hex')
